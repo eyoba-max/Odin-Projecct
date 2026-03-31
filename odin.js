@@ -92,4 +92,36 @@ if(playerScore>computerScore){
     console.log("you got draw");
 }
 
+// your JavaScript file
+const container = document.querySelector("#container");
+
+const content = document.createElement("div");
+content.classList.add("content");
+content.textContent = "This is the glorious text-content!";
+
+container.appendChild(content);
+
+const newContent=document.createElement("p");
+newContent.classList.add("par");
+newContent.style.color="red";
+newContent.textContent="Hey, I'm red!!";
+container.appendChild(newContent);
+
+const h3=document.createElement("h3");
+h3.classList.add("h3");
+h3.textContent="I'm blue h3";
+h3.style.color="blue";
+container.appendChild(h3);
+
+const newDiv=document.createElement("div");
+newDiv.setAttribute("style","border:solid black; background:pink");
+let head=document.createElement("h1");
+head.textContent="I'm in adiv";
+newDiv.appendChild(head);
+let par=document.createElement("p");
+par.textContent="ME TOO";
+newDiv.appendChild(par);
+
+container.appendChild(newDiv);
+
 // console.log(humanMove);
