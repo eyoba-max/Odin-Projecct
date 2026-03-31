@@ -1,8 +1,16 @@
+
+
 // console.log('hello world');
 let playerScore=0;
 let computerScore=0;
 let draw=0;
 let num=Math.random();
+
+let rock=document.querySelector(".rock");
+
+let paper=document.querySelector(".paper");
+
+let scissor=document.querySelector(".scissor");
 
 let pcMove=computerMove(num);
 function computerMove(num){
@@ -14,114 +22,61 @@ function computerMove(num){
         return 'scissor';
     }
 }
-// console.log(pcMove);
 
-// let humanMove=getHumanChoice();
+function playRound(humanChoice, computerChoice) {
 
-function getHumanChoice(){
+    let total = playerScore + computerScore + draw;
+    if (total >= 5) return;
 
-    let choice=prompt("Rock, Paper, Scissor");
-    return choice;
-}
+    let player = humanChoice.toLowerCase();
 
-playGame();
+    if (player === computerChoice) {
+        console.log('Tie');
+        draw++;
+    } else if (
+        (player === 'rock' && computerChoice === 'scissor') ||
+        (player === 'paper' && computerChoice === 'rock') ||
+        (player === 'scissor' && computerChoice === 'paper')
+    ) {
+        console.log('You win');
+        playerScore++;
+    } else {
+        console.log('You lose');
+        computerScore++;
+    }
 
-function playGame(){
+    // update score
+    addp.textContent = `Win ${playerScore} Lose ${computerScore} Tie ${draw}`;
 
-for(let i=0;i<5;i++){
-    let humanMove=getHumanChoice();
-    playRound(humanMove,pcMove);
-}
+    total = playerScore + computerScore + draw;
 
-}
-
-function playRound(humanChoice,computerChoice){
-    let variable=humanChoice.toLowerCase();
-
-    if(variable==='rock'){
-        if(computerChoice==='rock'){
-            console.log('Tie');
-            draw++;
-        } else if(computerChoice==='paper'){
-            console.log('you lose');
-            computerScore++;
-        } else if(computerChoice==='scissor'){
-            console.log('you win');
-                playerScore++;
-            }
+    // game end
+    if (total === 5) {
+        if (playerScore > computerScore) {
+            addp.textContent = "🎉 You Win the Game!";
+        } else if (playerScore < computerScore) {
+            addp.textContent = "💻 Computer Wins!";
+        } else {
+            addp.textContent = "🤝 It's a Draw!";
         }
-    
-
-    if(variable==='paper'){
-        if(computerChoice==='paper'){
-            console.log('Tie');
-            draw++;
-        } else if(computerChoice==='scissor'){
-            console.log('you lose');
-            computerScore++;
-        } else if(computerChoice==='rock'){
-            console.log('you win');
-                playerScore++;
-            }
-        }
-
-    if(variable==='scissor'){
-        if(computerChoice==='scissor'){
-            console.log('Tie');
-            draw++;
-        } else if(computerChoice==='rock'){
-            console.log('you lose');
-            computerScore++;
-        } else if(computerChoice==='paper'){
-            console.log('you win');
-                playerScore++;
-            }
-        }
-    // console.log(playerScore);
-    // console.log(computerScore);
+    }
 }
+rock.addEventListener('click', function() {
+    playRound(rock.textContent, computerMove(Math.random()));
+});
 
-if(playerScore>computerScore){
-    console.log(`yow win ${playerScore} times and you lose ${computerScore} times ${draw} times draw`);
-    console.log("you beat the computer");
-} else if(playerScore<computerScore){
-    console.log(`yow win ${playerScore} times and you lose ${computerScore} times ${draw} times draw`);
-    console.log("the computer beat you");
-} else{
-    console.log(`yow win ${playerScore} times and you lose ${computerScore} times ${draw} times draw`);
-    console.log("you got draw");
-}
+paper.addEventListener('click', function() {
+    playRound(paper.textContent, computerMove(Math.random()));
+});
 
-// your JavaScript file
-const container = document.querySelector("#container");
+scissor.addEventListener('click', function() {
+    playRound(scissor.textContent, computerMove(Math.random()));
+});
 
-const content = document.createElement("div");
-content.classList.add("content");
-content.textContent = "This is the glorious text-content!";
+const add=document.createElement("div");
+const addp=document.createElement("p");
+add.appendChild(addp);
+document.body.appendChild(add);
 
-container.appendChild(content);
 
-const newContent=document.createElement("p");
-newContent.classList.add("par");
-newContent.style.color="red";
-newContent.textContent="Hey, I'm red!!";
-container.appendChild(newContent);
 
-const h3=document.createElement("h3");
-h3.classList.add("h3");
-h3.textContent="I'm blue h3";
-h3.style.color="blue";
-container.appendChild(h3);
-
-const newDiv=document.createElement("div");
-newDiv.setAttribute("style","border:solid black; background:pink");
-let head=document.createElement("h1");
-head.textContent="I'm in adiv";
-newDiv.appendChild(head);
-let par=document.createElement("p");
-par.textContent="ME TOO";
-newDiv.appendChild(par);
-
-container.appendChild(newDiv);
-
-// console.log(humanMove);
